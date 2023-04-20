@@ -1,0 +1,44 @@
+<ngx-hello name="{{ name }}"></ngx-hello>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="custom-file mb-2">
+        <input type="file" class="custom-file-input" id="validatedCustomFile" (change)="fileChangeEvent($event)" required>
+        <label class="custom-file-label" for="validatedCustomFile">Choose any image file</label>
+        <div class="invalid-feedback">Example invalid custom file feedback</div>
+      </div>
+      <div class="custom-control custom-checkbox mb-2">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" [value]="maintainAspectRatio" (change)="changeMaintainAspectRatio()">
+        <label class="custom-control-label" for="customCheck1">Maintain aspect ratio</label>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-outline-primary" (click)="rotateLeft()">Rotate left</button>
+        <button class="btn btn-outline-primary" (click)="rotateRight()">Rotate right</button>
+        <button class="btn btn-outline-primary" (click)="flipHorizontal()">Flip horizontal</button>
+        <button class="btn btn-outline-primary" (click)="flipVertical()">Flip vertical</button>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="maintainAspectRatio"
+          [aspectRatio]="4 / 3"
+          [resizeToWidth]="0"
+          [cropperMinWidth]="0"
+          [onlyScaleDown]="true"
+          [roundCropper]="false"
+          format="png"
+          outputType="both"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          [style.display]="showCropper ? null : 'none'"
+      ></image-cropper>
+    </div>
+    <div class="col-md-12 mt-3 mb-5">
+      <img [src]="croppedImage" />
+    </div>
+  </div>
+</div>
